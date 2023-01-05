@@ -1,5 +1,5 @@
 # valued-enums
-Macros collection and specify trait for creating valued or python-like enums
+Macros collection and specify trait for creating valued or python-like enums.
 
 # Installation
 ```toml
@@ -9,6 +9,7 @@ version = "1.0.0"
 ```
 
 # Example
+When you writing your enums collection, i recommend using `pub` to expand the trait in the rest of your project.
 ```rust
 pub use valued_enums::*;
 
