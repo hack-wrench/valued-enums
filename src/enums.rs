@@ -13,7 +13,7 @@ pub trait ValuedEnum<T> where Self: Sized {
 macro_rules! py_enum {
     {
         $(#[$meta:meta])*
-        $name:ident ( $valtype:ty ):
+        $e_vis:vis $name:ident ( $valtype:ty ):
             $(
                 $(#[$item_meta:meta])*
                 $id:ident = $val:expr
@@ -22,7 +22,7 @@ macro_rules! py_enum {
     } => {
         crate::valued_enum! {
             $(#[$meta])*
-            pub enum $name ($valtype) {
+            $e_vis enum $name ($valtype) {
                 $(
                     $(#[$item_meta])*
                     pub $id = $val,
@@ -36,7 +36,7 @@ macro_rules! py_enum {
 macro_rules! rust_enum {
     {
         $(#[$meta:meta])*
-        enum $name:ident ( $valtype:ty ) {
+        $e_vis:vis enum $name:ident ( $valtype:ty ) {
             $(
                 $(#[$item_meta:meta])*
                 $id:ident = $val:expr,
@@ -46,7 +46,7 @@ macro_rules! rust_enum {
     } => {
         crate::valued_enum! {
             $(#[$meta])*
-            pub enum $name ($valtype) {
+            $e_vis enum $name ($valtype) {
                 $(
                     $(#[$item_meta])*
                     pub $id = $val,
