@@ -13,7 +13,7 @@ pub trait ValuedEnum<T> where Self: Sized {
 macro_rules! py_enum {
     {
         $(#[$meta:meta])*
-        $e_vis:vis $name:ident ( $valtype:ty ):
+        $name:ident ( $valtype:ty ):
             $(
                 $(#[$item_meta:meta])*
                 $id:ident = $val:expr
@@ -22,7 +22,7 @@ macro_rules! py_enum {
     } => {
         crate::valued_enum! {
             $(#[$meta])*
-            $e_vis enum $name ($valtype) {
+            pub enum $name ($valtype) {
                 $(
                     $(#[$item_meta])*
                     pub $id = $val,
