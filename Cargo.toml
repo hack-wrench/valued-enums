@@ -9,5 +9,6 @@ repository = "https://github.com/hack-wrench/valued-enums/"
 homepage   = "https://github.com/hack-wrench/valued-enums/"
 authors    = ["H-W <github.com/hack-wrench>"]
 keywords   = ["enums", "python-like"]
+
 readme     = "README.md"
 license    = "The Unlicense"
