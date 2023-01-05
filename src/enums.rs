@@ -1,6 +1,6 @@
 pub trait ValuedEnum<T> where Self: Sized {
     fn key(&self) -> &str;
-    fn value(&self) -> T;
+    fn value(&self) -> &T;
 
     fn keys() -> Vec<&'static str>;
     fn values() -> Vec<T>;
@@ -68,7 +68,6 @@ macro_rules! valued_enum {
            $(,)?
        }
     } => {
-        #[derive(PartialEq, Eq)]
         $(#[$meta])*
         $e_vis struct $name(&'static str, $valtype);
 
@@ -84,8 +83,8 @@ macro_rules! valued_enum {
                 self.0
             }
 
-            fn value(&self) -> $valtype {
-                self.1
+            fn value(&self) -> &$valtype {
+                &self.1
             }
 
             fn keys() -> Vec<&'static str> {

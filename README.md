@@ -4,14 +4,14 @@ Macros collection and specify trait for creating valued or python-like enums.
 # Installation
 ```toml
 [dependencies.valued-enums]
-version = "1.0.2"
+version = "1.1.3"
 #git = "https://github.com/hack-wrench/valued-enums"
 ```
 
 # Example
 When you writing your enums collection, i recommend using `pub` to expand the trait in the rest of your project.
 ```rust
-pub use valued_enums::*;
+use valued_enums::*;
 
 
 py_enum! {
@@ -42,6 +42,17 @@ mod some_inner_module {
     }
 }
 
+// To use the match and equal pattern, you must implement #[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq)]
+struct Point(i32, i32);
+
+py_enum! {
+    #[derive(PartialEq, Eq)]
+    PointEnum(Point):
+        A = Point(1, 2)
+        B = Point(3, 4)
+}
+
 fn main() {
     println!("Get key: {}", RustLikeEnum::ONE.key());
     println!("Get value: {}", PyLikeEnum::TWO.value());
@@ -53,5 +64,13 @@ fn main() {
 
     // Convert to private field can be dangerous!
     println!("Convert title to enum: {}", some_inner_module::VisibleCustomizeEnum::from_key("PRIVATE").unwrap().value());
+
+    // Don't forget to implement for your enum: #[derive(PartialEq, Eq)]
+    let point = PointEnum::A;
+    match point {
+        PointEnum::A => println!("Matched A enum"),
+        PointEnum::B => println!("Matched B enum"),
+        _ => println!("Nothing"),
+    };
 }
 ```

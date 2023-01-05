@@ -29,6 +29,17 @@ mod some_inner_module {
     }
 }
 
+// To use the match and equal pattern, you must implement #[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq)]
+struct Point(i32, i32);
+
+py_enum! {
+    #[derive(PartialEq, Eq)]
+    PointEnum(Point):
+        A = Point(1, 2)
+        B = Point(3, 4)
+}
+
 fn main() {
     println!("Get key: {}", RustLikeEnum::ONE.key());
     println!("Get value: {}", PyLikeEnum::TWO.value());
@@ -40,4 +51,12 @@ fn main() {
 
     // Convert to private field can be dangerous!
     println!("Convert title to enum: {}", some_inner_module::VisibleCustomizeEnum::from_key("PRIVATE").unwrap().value());
+
+    // Don't forget to implement for your enum: #[derive(PartialEq, Eq)]
+    let point = PointEnum::A;
+    match point {
+        PointEnum::A => println!("Matched A enum"),
+        PointEnum::B => println!("Matched B enum"),
+        _ => println!("Nothing"),
+    };
 }

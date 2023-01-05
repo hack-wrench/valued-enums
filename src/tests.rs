@@ -2,7 +2,8 @@ use crate::*;
 
 
 py_enum! {
-    #[derive(Debug)]
+    // To use the match and equal pattern, you must implement #[derive(PartialEq, Eq)]
+    #[derive(PartialEq, Eq, Debug)]
     PyLikeEnum(u8):
         ONE = 1
         TWO = 2
@@ -30,12 +31,12 @@ valued_enum! {
 #[test]
 fn enums() {
     assert_eq!(PyLikeEnum::ONE, PyLikeEnum::ONE);
-    assert_eq!(PyLikeEnum::TWO.value(), 2);
+    assert_eq!(PyLikeEnum::TWO.value(), &2);
 
     assert_eq!(RustLikeEnum::THREE.key(), "THREE");
     assert_eq!(RustLikeEnum::values(), vec![
         (1, 1), (2, 2), (3, 3),
     ]);
 
-    assert_eq!(FullCustomizeRustLike::PRIVATE.value(), "private")
+    assert_eq!(FullCustomizeRustLike::PRIVATE.value(), &"private")
 }
