@@ -11,4 +11,4 @@ authors    = ["H-W <github.com/hack-wrench>"]
 keywords   = ["enums", "python-like"]
 
 readme     = "README.md"
-license    = "The Unlicense"
+license    = "Unlicense"
