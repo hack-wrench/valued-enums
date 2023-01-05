@@ -38,6 +38,6 @@ fn main() {
 
     println!("Get all variants: {:?}", some_inner_module::VisibleCustomizeEnum::variants());
 
-    // It can be dangerous
+    // Convert to private field can be dangerous!
     println!("Convert title to enum: {}", some_inner_module::VisibleCustomizeEnum::from_key("PRIVATE").unwrap().value());
 }
