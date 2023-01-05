@@ -2,3 +2,12 @@
 name = "valued-enums"
 version = "1.0.0"
 edition = "2021"
+
+repository = "https://github.com/hack-wrench/valued-enums/"
+homepage   = "https://github.com/hack-wrench/valued-enums/"
+license    = "The Unlicense"
+authors    = ["H-W <github.com/hack-wrench>"]
+
+keywords   = ["enums", "python-like"]
+publish    = ["valued-enums"]
+readme     = "README.md"

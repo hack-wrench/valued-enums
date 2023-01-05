@@ -10,7 +10,7 @@ version = "1.0.0"
 
 # Example
 ```rust
-use valued_enums::*;
+pub use valued_enums::*;
 
 
 py_enum! {
