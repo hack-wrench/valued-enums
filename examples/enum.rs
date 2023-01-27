@@ -34,13 +34,14 @@ mod some_inner_module {
 struct Point(i32, i32);
 
 py_enum! {
-    #[derive(PartialEq, Eq)]
     PointEnum(Point):
         A = Point(1, 2)
         B = Point(3, 4)
 }
 
 fn main() {
+    println!("Equal enum with their value type: {}", PyLikeEnum::ONE.equal(&1));
+
     println!("Get key: {}", RustLikeEnum::ONE.key());
     println!("Get value: {}", PyLikeEnum::TWO.value());
     
@@ -50,13 +51,8 @@ fn main() {
     println!("Get all variants: {:?}", some_inner_module::VisibleCustomizeEnum::variants());
 
     // Convert to private field can be dangerous!
-    println!("Convert title to enum: {}", some_inner_module::VisibleCustomizeEnum::from_key("PRIVATE").unwrap().value());
-
+    println!("Convert from title to enum: {}", some_inner_module::VisibleCustomizeEnum::from_key("PRIVATE").unwrap().value());
+    
     // Don't forget to implement for your enum: #[derive(PartialEq, Eq)]
-    let point = PointEnum::A;
-    match point {
-        PointEnum::A => println!("Matched A enum"),
-        PointEnum::B => println!("Matched B enum"),
-        _ => println!("Nothing"),
-    };
+    println!("Convert from value to enum: {}", PyLikeEnum::from_value(&3).unwrap().key());    
 }

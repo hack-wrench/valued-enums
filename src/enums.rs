@@ -1,13 +1,17 @@
 pub trait ValuedEnum<T> where Self: Sized {
+    fn equal(&self, other: &T) -> bool;
+
     fn key(&self) -> &str;
     fn value(self) -> T;
 
     fn keys() -> Vec<&'static str>;
     fn values() -> Vec<T>;
-
     fn variants() -> Vec<Self>;
+
     fn from_key(key: &str) -> Option<Self>;
+    fn from_value(value: &T) -> Option<Self>;
 }
+
 
 #[macro_export]
 macro_rules! py_enum {
@@ -79,6 +83,10 @@ macro_rules! valued_enum {
         }
 
         impl crate::ValuedEnum<$valtype> for $name {
+            fn equal(&self, other: &$valtype) -> bool {
+                &self.1 == other
+            }
+
             fn key(&self) -> &str {
                 self.0
             }
@@ -89,13 +97,13 @@ macro_rules! valued_enum {
 
             fn keys() -> Vec<&'static str> {
                 vec![
-                    $( stringify!($id), )*
+                    $( $name::$id.key(), )*
                 ]
             }
 
             fn values() -> Vec<$valtype> {
                 vec![
-                    $( $val, )*
+                    $( $name::$id.value(), )*
                 ]
             }
 
@@ -106,10 +114,15 @@ macro_rules! valued_enum {
             }
 
             fn from_key(key: &str) -> Option<Self> {
-                match key {
-                    $( stringify!($id) => Some($name::$id), )*
-                    _ => None
-                }
+                $( if $name::$id.key() == key { return Some($name::$id) } )*
+                
+                None
+            }
+
+            fn from_value(value: &$valtype) -> Option<Self> {
+                $( if $name::$id.equal(value) { return Some($name::$id) } )*
+                
+                None
             }
         }
     };
