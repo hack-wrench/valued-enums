@@ -3,6 +3,7 @@ pub trait ValuedEnum<T> where Self: Sized {
 
     fn key(&self) -> &str;
     fn value(self) -> T;
+    fn ref_value(&self) -> &T;
 
     fn keys() -> Vec<&'static str>;
     fn values() -> Vec<T>;
@@ -93,6 +94,10 @@ macro_rules! valued_enum {
 
             fn value(self) -> $valtype {
                 self.1
+            }
+
+            fn ref_value(&self) -> &$valtype {
+                &self.1
             }
 
             fn keys() -> Vec<&'static str> {

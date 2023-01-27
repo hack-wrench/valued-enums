@@ -57,6 +57,9 @@ fn main() {
 
     println!("Get key: {}", RustLikeEnum::ONE.key());
     println!("Get value: {}", PyLikeEnum::TWO.value());
+
+    // May help in the case of a whole enum owned
+    println!("Get ref value: &{}", PyLikeEnum::THREE.ref_value());
     
     println!("Get all keys: {:?}", RustLikeEnum::keys());
     println!("Get all values: {:?}", PyLikeEnum::values());
