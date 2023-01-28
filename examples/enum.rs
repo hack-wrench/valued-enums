@@ -6,6 +6,11 @@ py_enum! {
         ONE = 1
         TWO = 2
         THREE = 3
+
+        // Do not forget that this type of enumeration
+        //   does not check the uniqueness of the value!
+        // ::from_value will return the element that is encountered first.
+        DUPLICATE = 3
 }
 
 rust_enum! {
@@ -13,6 +18,9 @@ rust_enum! {
         ONE = (1, 1),
         TWO = (2, 2),
         THREE = (3, 3),
+
+        // Similar atention for rust_enum
+        DUPLICATE = (3, 3),
     }
 }
 
