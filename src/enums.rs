@@ -25,7 +25,7 @@ macro_rules! py_enum {
             )*
             $(,)?
     } => {
-        crate::valued_enum! {
+        $crate::valued_enum! {
             $(#[$meta])*
             pub enum $name ($valtype) {
                 $(
@@ -49,7 +49,7 @@ macro_rules! rust_enum {
             $(,)?
         }
     } => {
-        crate::valued_enum! {
+        $crate::valued_enum! {
             $(#[$meta])*
             $e_vis enum $name ($valtype) {
                 $(
@@ -83,7 +83,7 @@ macro_rules! valued_enum {
             )*
         }
 
-        impl crate::ValuedEnum<$valtype> for $name {
+        impl $crate::ValuedEnum<$valtype> for $name {
             fn equal(&self, other: &$valtype) -> bool {
                 &self.1 == other
             }

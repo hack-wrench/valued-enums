@@ -19,7 +19,7 @@ rust_enum! {
         TWO = (2, 2),
         THREE = (3, 3),
 
-        // Similar atention for rust_enum
+        // Similar atention for any ValuedEnum
         DUPLICATE = (3, 3),
     }
 }

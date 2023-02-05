@@ -4,7 +4,7 @@ Macros collection and specify trait for creating valued or python-like enums.
 # Installation
 ```toml
 [dependencies.valued-enums]
-version = "*"
+version = "1.1.9"
 #git = "https://github.com/hack-wrench/valued-enums"
 ```
 
